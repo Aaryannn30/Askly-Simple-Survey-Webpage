@@ -1,34 +1,35 @@
-import React, { useState } from "react";
-import { ThemeProvider, CssBaseline } from "@mui/material";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import AdminPanel from "./pages/AdminPanel";
-import CreateSurveyPage from "./pages/CreateSurveyPage";
-import theme from "./theme";
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
 
-const App = () => {
-  const [surveys, setSurveys] = useState([]);
-
-  const addSurvey = (newSurvey) => {
-    setSurveys((prevSurveys) => [...prevSurveys, newSurvey]);
-  };
+function App() {
+  const [count, setCount] = useState(0)
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Router>
-        <Routes>
-          <Route
-            path="/admin"
-            element={<AdminPanel surveys={surveys} addSurvey={addSurvey} />}
-          />
-          <Route
-            path="/admin/create-survey"
-            element={<CreateSurveyPage addSurvey={addSurvey} />}
-          />
-        </Routes>
-      </Router>
-    </ThemeProvider>
-  );
-};
+    <>
+      <div>
+        <a href="https://vite.dev" target="_blank">
+          <img src={viteLogo} className="logo" alt="Vite logo" />
+        </a>
+        <a href="https://react.dev" target="_blank">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
+      </div>
+      <h1>Vite + React</h1>
+      <div className="card">
+        <button onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </button>
+        <p>
+          Edit <code>src/App.jsx</code> and save to test HMR
+        </p>
+      </div>
+      <p className="read-the-docs">
+        Click on the Vite and React logos to learn more
+      </p>
+    </>
+  )
+}
 
-export default App;
+export default App
