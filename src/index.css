@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+@layer base {
+  h1 {
+    @apply text-5xl leading-tight;
+  }
+  a {
+    @apply font-medium text-[#646cff] no-underline;
+  }
+  a:hover {
+    @apply text-[#535bf2];
+  }
+  button {
+    @apply rounded-lg border border-transparent py-2 px-4 text-base font-medium bg-[#1a1a1a] cursor-pointer transition-colors;
+  }
+  button:hover {
+    @apply border-[#646cff];
+  }
+  button:focus,
+  button:focus-visible {
+    @apply outline-4;
+    outline-style: auto;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    @apply text-[#213547] bg-white;
+  }
+  a:hover {
+    @apply text-[#747bff];
+  }
+  button {
+    @apply bg-[#f9f9f9];
+  }
+}
