@@ -14,4 +14,5 @@ export const admin = {
 export const user = {
   getAllSurvey: `/user/getAllSurveys`,
   submitResponse: `/user/submitSurveyResponse`, 
+  logout : `/user/logout`
 }

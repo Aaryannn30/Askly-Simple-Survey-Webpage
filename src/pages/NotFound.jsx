@@ -1,3 +1,5 @@
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";
 import Button from "../components/Button";
 import { FaCog, FaBell, FaSearch } from "react-icons/fa";
 import Header from "./Header";

@@ -7,9 +7,7 @@ const Sidebar = () => {
 
   const menuItems = [
     { label: "Dashboard", path: "/dashboard" },
-    { label: "Profile", path: "/profile" },
     { label: "Admin Panel", path: "/admin" },
-    { label: "Logout", path: "/login" },
   ];
 
   return (
@@ -18,7 +16,7 @@ const Sidebar = () => {
       animate={{ x: 0 }}
       className="w-64 bg-primary h-screen p-6 text-white fixed"
     >
-      <h2 className="text-2xl font-bold mb-8">Insight Form</h2>
+      <h2 className="text-2xl font-bold mb-8">Askly Simple Survey Webpage</h2>
       <ul>
         {menuItems.map((item) => (
           <li key={item.path} className="mb-4">

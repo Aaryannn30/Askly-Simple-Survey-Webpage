@@ -1,154 +1,12 @@
-// import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
-// import axios from "axios";
-// import Input from "../components/Input";
-// import Button from "../components/Button";
-// import { motion } from "framer-motion";
-// import { FaCog, FaBell, FaSearch } from "react-icons/fa";
-// import { endpoint, auth } from "../API/config";
-// import Header from "./Header";
-
-// function Signup() {
-//   const [form, setForm] = useState({
-//     fullName: "",
-//     username: "",
-//     email: "",
-//     password: "",
-//     confirmPassword: "",
-//   });
-//   const [errors, setErrors] = useState({});
-//   const [success, setSuccess] = useState("");
-//   const [loading, setLoading] = useState(false);
-//   const navigate = useNavigate();
-//   const isLoggedIn = !!localStorage.getItem("token");
-
-//   const validate = () => {
-//     const newErrors = {};
-//     if (!form.fullName) newErrors.fullName = "Full Name is required";
-//     if (!form.username) newErrors.username = "Username is required";
-//     if (!form.email.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/)) newErrors.email = "Invalid email format";
-//     if (form.password.length < 8 || !/[!@#$%^&*]/.test(form.password) || !/\d/.test(form.password))
-//       newErrors.password = "Password must be 8+ chars with a number and special char";
-//     if (form.password !== form.confirmPassword) newErrors.confirmPassword = "Passwords do not match";
-//     return newErrors;
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     const validationErrors = validate();
-//     if (Object.keys(validationErrors).length > 0) {
-//       setErrors(validationErrors);
-//       return;
-//     }
-  
-//     setLoading(true);
-//     setErrors({});
-//     setSuccess("");
-  
-//     try {
-//       console.log("Sending request to:", `${endpoint}/${auth.signUp}`);
-//       console.log("Payload:", {
-//         username: form.username,
-//         email: form.email,
-//         password: form.password,
-//       });
-  
-//       const response = await axios.post(`${endpoint}/${auth.signUp}`, {
-//         username: form.username,
-//         email: form.email,
-//         password: form.password,
-//       });
-  
-//       console.log("API Response:", response.data);
-//       const responseData = response.data.body || response.data;
-  
-//       if (response.data.statusCode === 201) {
-//         localStorage.setItem("pendingUsername", form.username); // Store username temporarily
-//         navigate("/confirm"); // Redirect to confirmation page
-          
-//       } else {
-//         console.log("API Error Message:", responseData.message); // Log exact API message
-//         setErrors({ apiError: responseData.message || "Signup failed. Try again." });
-//       }
-//     } catch (error) {
-//       console.error("Signup Error:", error);
-//       setErrors({ apiError: error.response?.data?.message || "An error occurred. Please try again." });
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-  
-
-//   return (
-//     <div className="bg-slate-100 min-h-screen font-sans">
-//       <Header />
-//       <motion.div
-//         initial={{ opacity: 0, y: 20 }}
-//         animate={{ opacity: 1, y: 0 }}
-//         className="flex items-center justify-center p-6 pt-20"
-//       >
-//         <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-lg">
-//           <h2 className="text-3xl font-bold text-blue-700 text-center mb-6">Sign Up</h2>
-//           {success && <p className="text-center text-green-600 mb-4">{success}</p>}
-//           {errors.apiError && <p className="text-center text-red-600 mb-4">{errors.apiError}</p>}
-//           <form onSubmit={handleSubmit}>
-//             <Input
-//               label="Full Name"
-//               value={form.fullName}
-//               onChange={(e) => setForm({ ...form, fullName: e.target.value })}
-//               error={errors.fullName}
-//             />
-//             <Input
-//               label="Username"
-//               value={form.username}
-//               onChange={(e) => setForm({ ...form, username: e.target.value })}
-//               error={errors.username}
-//             />
-//             <Input
-//               label="Email"
-//               value={form.email}
-//               onChange={(e) => setForm({ ...form, email: e.target.value })}
-//               error={errors.email}
-//             />
-//             <Input
-//               label="Password"
-//               type="password"
-//               value={form.password}
-//               onChange={(e) => setForm({ ...form, password: e.target.value })}
-//               error={errors.password}
-//             />
-//             <Input
-//               label="Confirm Password"
-//               type="password"
-//               value={form.confirmPassword}
-//               onChange={(e) => setForm({ ...form, confirmPassword: e.target.value })}
-//               error={errors.confirmPassword}
-//             />
-//             <Button type="submit" className="w-full mt-6 bg-blue-700 hover:bg-blue-800 text-white" disabled={loading || !Object.values(form).every(Boolean)}>
-//               {loading ? "Signing Up..." : "Sign Up"}
-//             </Button>
-//           </form>
-//           <p className="mt-4 text-center text-sm text-gray-600">
-//             Already have an account?{" "}
-//             <a href="/login" className="text-blue-700 hover:underline">
-//               Login
-//             </a>
-//           </p>
-//         </div>
-//       </motion.div>
-//     </div>
-//   );
-// }
-
-// export default Signup;
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import { endpoint, auth } from "../API/config";
 import Header from "./Header";
+import { useEffect } from "react";
 
 function Signup() {
   const [form, setForm] = useState({
@@ -162,6 +20,7 @@ function Signup() {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const isLoggedIn = localStorage.getItem("accessToken");
   const navigate = useNavigate();
 
   const validate = () => {
@@ -170,8 +29,13 @@ function Signup() {
     if (!form.username) newErrors.username = "Username is required";
     if (!form.email.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/))
       newErrors.email = "Invalid email format";
-    if (form.password.length < 8 || !/[!@#$%^&*]/.test(form.password) || !/\d/.test(form.password))
-      newErrors.password = "Password must be 8+ chars with a number and special char";
+    if (
+      form.password.length < 8 ||
+      !/[!@#$%^&*]/.test(form.password) ||
+      !/\d/.test(form.password)
+    )
+      newErrors.password =
+        "Password must be 8+ chars with a number and special char";
     if (form.password !== form.confirmPassword)
       newErrors.confirmPassword = "Passwords do not match";
     return newErrors;
@@ -199,125 +63,293 @@ function Signup() {
         localStorage.setItem("pendingUsername", form.username);
         navigate("/confirm");
       } else {
-        setErrors({ apiError: response.data.message || "Signup failed. Try again." });
+        setErrors({
+          apiError: response.data.message || "Signup failed. Try again.",
+        });
       }
     } catch (error) {
-      setErrors({ apiError: error.response?.data?.message || "An error occurred. Please try again." });
+      setErrors({
+        apiError:
+          error.response?.data?.message ||
+          "An error occurred. Please try again.",
+      });
     } finally {
       setLoading(false);
     }
   };
 
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/dashboard");
+    }
+  }, []);
+
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-100 to-white">
-      <Header />
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-md p-8 bg-white bg-opacity-80 backdrop-blur-xl rounded-xl shadow-lg border border-gray-200 mt-20"
-      >
-        <h2 className="text-3xl font-semibold text-gray-800 text-center mb-6">Create an Account</h2>
-        {errors.apiError && <p className="text-center text-red-500 mb-4">{errors.apiError}</p>}
+    <>
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-50 relative overflow-hidden">
+        {/* Background graphics */}
+        <div className="absolute inset-0 overflow-hidden z-0">
+          {/* Floating blobs */}
+          <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-blue-100 opacity-40 mix-blend-multiply filter blur-xl animate-blob1"></div>
+          <div className="absolute top-1/2 right-1/3 w-80 h-80 rounded-full bg-indigo-100 opacity-30 mix-blend-multiply filter blur-xl animate-blob2"></div>
+          <div className="absolute bottom-1/4 left-1/3 w-72 h-72 rounded-full bg-purple-100 opacity-30 mix-blend-multiply filter blur-xl animate-blob3"></div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Full Name */}
-          <div className="relative">
-            <FaUser className="absolute left-4 top-3 text-gray-500" />
-            <input
-              type="text"
-              placeholder="Full Name"
-              value={form.fullName}
-              onChange={(e) => setForm({ ...form, fullName: e.target.value })}
-              className="w-full pl-12 pr-4 py-3 rounded-lg bg-white border border-gray-300 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-            {errors.fullName && <p className="text-red-500 text-sm mt-1">{errors.fullName}</p>}
-          </div>
+          {/* Grid pattern */}
+          <div className="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48cGF0aCBkPSJNMCAwaDQwdjQwSDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTIwIDB2NDBNMCAyMGg0MCIgc3Ryb2tlPSJyZ2JhKDEwMywxMTYsMjQ1LDAuMSkiIHN0cm9rZS13aWR0aD0iMSIvPjwvc3ZnPg==')]"></div>
 
-          {/* Username */}
-          <div className="relative">
-            <FaUser className="absolute left-4 top-3 text-gray-500" />
-            <input
-              type="text"
-              placeholder="Username"
-              value={form.username}
-              onChange={(e) => setForm({ ...form, username: e.target.value })}
-              className="w-full pl-12 pr-4 py-3 rounded-lg bg-white border border-gray-300 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-            {errors.username && <p className="text-red-500 text-sm mt-1">{errors.username}</p>}
-          </div>
+          {/* Decorative elements */}
+          <div className="absolute top-0 right-0 w-48 h-48 -mr-24 -mt-24 bg-blue-200 rounded-full opacity-10"></div>
+          <div className="absolute bottom-0 left-0 w-64 h-64 -ml-32 -mb-32 bg-indigo-200 rounded-full opacity-10"></div>
+        </div>
 
-          {/* Email */}
-          <div className="relative">
-            <FaEnvelope className="absolute left-4 top-3 text-gray-500" />
-            <input
-              type="email"
-              placeholder="Email"
-              value={form.email}
-              onChange={(e) => setForm({ ...form, email: e.target.value })}
-              className="w-full pl-12 pr-4 py-3 rounded-lg bg-white border border-gray-300 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-            {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
-          </div>
-
-          {/* Password */}
-          <div className="relative">
-            <FaLock className="absolute left-4 top-3 text-gray-500" />
-            <input
-              type={showPassword ? "text" : "password"}
-              placeholder="Password"
-              value={form.password}
-              onChange={(e) => setForm({ ...form, password: e.target.value })}
-              className="w-full pl-12 pr-12 py-3 rounded-lg bg-white border border-gray-300 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-            <button
-              type="button"
-              className="absolute right-4 top-3 text-gray-500 hover:text-blue-500"
-              onClick={() => setShowPassword(!showPassword)}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="w-full max-w-md p-8 bg-white bg-opacity-90 backdrop-blur-lg rounded-xl shadow-2xl border border-gray-100 relative z-10"
+        >
+          <div className="text-center mb-8">
+            <motion.h2
+              initial={{ scale: 0.95 }}
+              animate={{ scale: 1 }}
+              className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600"
             >
-              {showPassword ? <FaEyeSlash /> : <FaEye />}
-            </button>
-            {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
-          </div>
-
-          {/* Confirm Password */}
-          <div className="relative">
-            <FaLock className="absolute left-4 top-3 text-gray-500" />
-            <input
-              type={showConfirmPassword ? "text" : "password"}
-              placeholder="Confirm Password"
-              value={form.confirmPassword}
-              onChange={(e) => setForm({ ...form, confirmPassword: e.target.value })}
-              className="w-full pl-12 pr-12 py-3 rounded-lg bg-white border border-gray-300 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-            <button
-              type="button"
-              className="absolute right-4 top-3 text-gray-500 hover:text-blue-500"
-              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              Create an Account
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              className="text-gray-500 mt-2"
             >
-              {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
-            </button>
-            {errors.confirmPassword && <p className="text-red-500 text-sm mt-1">{errors.confirmPassword}</p>}
+              Join us to get started
+            </motion.p>
           </div>
 
-          {/* Sign Up Button */}
-          <button
-            type="submit"
-            className="w-full py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition duration-300 shadow-md"
-            disabled={loading}
+          {errors.apiError && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-center p-3 mb-4 bg-red-50 text-red-500 rounded-lg"
+            >
+              {errors.apiError}
+            </motion.div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {/* Username */}
+            <motion.div
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 }}
+              className="relative"
+            >
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">
+                <FaUser />
+              </div>
+              <input
+                type="text"
+                placeholder="Username"
+                value={form.username}
+                onChange={(e) => setForm({ ...form, username: e.target.value })}
+                className="w-full pl-10 pr-4 py-3 rounded-lg bg-white border border-gray-200 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all"
+              />
+              {errors.username && (
+                <motion.p className="text-red-500 text-sm mt-1 ml-1">
+                  {errors.username}
+                </motion.p>
+              )}
+            </motion.div>
+
+            {/* Email */}
+            <motion.div
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3 }}
+              className="relative"
+            >
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">
+                <FaEnvelope />
+              </div>
+              <input
+                type="email"
+                placeholder="Email"
+                value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
+                className="w-full pl-10 pr-4 py-3 rounded-lg bg-white border border-gray-200 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all"
+              />
+              {errors.email && (
+                <motion.p className="text-red-500 text-sm mt-1 ml-1">
+                  {errors.email}
+                </motion.p>
+              )}
+            </motion.div>
+
+            {/* Password */}
+            <motion.div
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.4 }}
+              className="relative"
+            >
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">
+                <FaLock />
+              </div>
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                value={form.password}
+                onChange={(e) => setForm({ ...form, password: e.target.value })}
+                className="w-full pl-10 pr-10 py-3 rounded-lg bg-white border border-gray-200 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all"
+              />
+              <button
+                type="button"
+                className="absolute inset-y-0 right-0 flex items-center bg-transparent pr-3 hover:border-none border-none text-gray-400 hover:text-blue-500 transition-colors"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
+              {errors.password && (
+                <motion.p className="text-red-500 text-sm mt-1 ml-1">
+                  {errors.password}
+                </motion.p>
+              )}
+            </motion.div>
+
+            {/* Confirm Password */}
+            <motion.div
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.5 }}
+              className="relative"
+            >
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">
+                <FaLock />
+              </div>
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                placeholder="Confirm Password"
+                value={form.confirmPassword}
+                onChange={(e) =>
+                  setForm({ ...form, confirmPassword: e.target.value })
+                }
+                className="w-full pl-10 pr-10 py-3 rounded-lg bg-white border border-gray-200 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all"
+              />
+              <button
+                type="button"
+                className="absolute inset-y-0 right-0 flex items-center bg-transparent pr-3 hover:border-none border-none text-gray-400 hover:text-blue-500 transition-colors"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              >
+                {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
+              {errors.confirmPassword && (
+                <motion.p className="text-red-500 text-sm mt-1 ml-1">
+                  {errors.confirmPassword}
+                </motion.p>
+              )}
+            </motion.div>
+
+            {/* Sign Up Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+            >
+              <button
+                type="submit"
+                className={`w-full py-3 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold rounded-lg transition-all duration-300 shadow-md hover:shadow-lg ${
+                  loading ? "opacity-80 cursor-not-allowed" : ""
+                }`}
+                disabled={loading}
+              >
+                {loading ? (
+                  <span className="flex items-center justify-center">
+                    <svg
+                      className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
+                    </svg>
+                    Signing Up...
+                  </span>
+                ) : (
+                  "Sign Up"
+                )}
+              </button>
+            </motion.div>
+          </form>
+
+          {/* Login Link */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.7 }}
+            className="mt-6 text-center text-sm text-gray-500"
           >
-            {loading ? "Signing Up..." : "Sign Up"}
-          </button>
-        </form>
+            Already have an account?{" "}
+            <a
+              href="/login"
+              className="text-blue-500 hover:text-blue-600 font-medium transition-colors"
+            >
+              Login
+            </a>
+          </motion.div>
+        </motion.div>
 
-        {/* Login Link */}
-        <p className="mt-4 text-center text-sm text-gray-600">
-          Already have an account?{" "}
-          <a href="/login" className="text-blue-500 hover:underline font-medium">
-            Login
-          </a>
-        </p>
-      </motion.div>
-    </div>
+        {/* Add global styles for animations */}
+        <style jsx global>{`
+          @keyframes blob1 {
+            0%,
+            100% {
+              transform: translate(0, 0) scale(1);
+            }
+            50% {
+              transform: translate(20px, -20px) scale(1.05);
+            }
+          }
+          @keyframes blob2 {
+            0%,
+            100% {
+              transform: translate(0, 0) scale(1);
+            }
+            50% {
+              transform: translate(-15px, 15px) scale(1.05);
+            }
+          }
+          @keyframes blob3 {
+            0%,
+            100% {
+              transform: translate(0, 0) scale(1);
+            }
+            50% {
+              transform: translate(10px, -10px) scale(1.05);
+            }
+          }
+          .animate-blob1 {
+            animation: blob1 8s ease-in-out infinite;
+          }
+          .animate-blob2 {
+            animation: blob2 10s ease-in-out infinite;
+          }
+          .animate-blob3 {
+            animation: blob3 12s ease-in-out infinite;
+          }
+        `}</style>
+      </div>
+    </>
   );
 }
 

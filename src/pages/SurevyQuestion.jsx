@@ -12,7 +12,9 @@ const SurveyQuestion = ({ question, handleAnswer }) => {
                 type="radio"
                 name={question.QuestionID}
                 value={option}
-                onChange={(e) => handleAnswer(question.QuestionID, e.target.value)}
+                onChange={(e) =>
+                  handleAnswer(question.QuestionID, e.target.value)
+                }
               />
               {option}
             </label>
@@ -25,7 +27,11 @@ const SurveyQuestion = ({ question, handleAnswer }) => {
         <div style={styles.questionContainer}>
           <p>{question.QuestionText}</p>
           {question.Scale.map((value) => (
-            <button key={value} style={styles.likertButton} onClick={() => handleAnswer(question.QuestionID, value)}>
+            <button
+              key={value}
+              style={styles.likertButton}
+              onClick={() => handleAnswer(question.QuestionID, value)}
+            >
               {value}
             </button>
           ))}
@@ -48,7 +54,11 @@ const SurveyQuestion = ({ question, handleAnswer }) => {
         <div style={styles.questionContainer}>
           <p>{question.QuestionText}</p>
           {[1, 2, 3, 4, 5].map((star) => (
-            <span key={star} onClick={() => handleAnswer(question.QuestionID, star)} style={styles.star}>
+            <span
+              key={star}
+              onClick={() => handleAnswer(question.QuestionID, star)}
+              style={styles.star}
+            >
               ⭐
             </span>
           ))}
@@ -59,8 +69,18 @@ const SurveyQuestion = ({ question, handleAnswer }) => {
       return (
         <div style={styles.questionContainer}>
           <p>{question.QuestionText}</p>
-          <button style={styles.yesButton} onClick={() => handleAnswer(question.QuestionID, "Yes")}>Yes</button>
-          <button style={styles.noButton} onClick={() => handleAnswer(question.QuestionID, "No")}>No</button>
+          <button
+            style={styles.yesButton}
+            onClick={() => handleAnswer(question.QuestionID, "Yes")}
+          >
+            Yes
+          </button>
+          <button
+            style={styles.noButton}
+            onClick={() => handleAnswer(question.QuestionID, "No")}
+          >
+            No
+          </button>
         </div>
       );
 
@@ -86,7 +106,12 @@ const SurveyQuestion = ({ question, handleAnswer }) => {
                         type="radio"
                         name={`${question.QuestionID}-${row}`}
                         value={col}
-                        onChange={(e) => handleAnswer(`${question.QuestionID}-${row}`, e.target.value)}
+                        onChange={(e) =>
+                          handleAnswer(
+                            `${question.QuestionID}-${row}`,
+                            e.target.value
+                          )
+                        }
                       />
                     </td>
                   ))}
@@ -101,7 +126,12 @@ const SurveyQuestion = ({ question, handleAnswer }) => {
       return (
         <div style={styles.questionContainer}>
           <p>{question.QuestionText}</p>
-          <input type="file" onChange={(e) => handleAnswer(question.QuestionID, e.target.files[0])} />
+          <input
+            type="file"
+            onChange={(e) =>
+              handleAnswer(question.QuestionID, e.target.files[0])
+            }
+          />
         </div>
       );
 
