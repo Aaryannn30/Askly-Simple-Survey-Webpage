@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@aws-sdk/client-cognito-identity-provider": "^3.772.0",
+    "crypto": "^1.0.1"
+  }
+}
