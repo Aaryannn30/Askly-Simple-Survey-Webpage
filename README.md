@@ -52,7 +52,7 @@ Build Askly-Simple-Survey-Webpage from the source and install dependencies:
 1. **Clone the repository:**
 
 ```bash
-git clone https://github.com/aaryanvm30/Askly-Simple-Survey-Webpage
+git clone https://github.com/aaryannn30/Askly-Simple-Survey-Webpage
 ```
 
 2. **Navigate to the project directory:**
