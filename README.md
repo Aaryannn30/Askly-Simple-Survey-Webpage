@@ -1,57 +1,73 @@
-ASKLY-SIMPLE-SURVEY-WEBPAGE
-Empower Insights, Simplify Feedback, Drive Innovation
-Built with the tools and technologies:
+# ASKLY-SIMPLE-SURVEY-WEBPAGE
 
-JSON
-Markdown
-npm
-Autoprefixer
-PostCSS
-JavaScript
-Chart.js
+*Empower Insights, Simplify Feedback, Drive Innovation*
 
-Table of Contents
+![Last Commit](https://img.shields.io/github/last-commit/aaryanvm30/Askly-Simple-Survey-Webpage)
+![GitHub Repo stars](https://img.shields.io/github/stars/aaryanvm30/Askly-Simple-Survey-Webpage?style=social)
+![Language](https://img.shields.io/github/languages/top/aaryanvm30/Askly-Simple-Survey-Webpage)
 
-Overview
-Getting Started
-Prerequisites
-Installation
-Usage
-Testing
+_Built with the tools and technologies:_
 
-Overview
-Getting Started
-Prerequisites
+![JSON](https://img.shields.io/badge/JSON-000?style=flat&logo=json)
+![Markdown](https://img.shields.io/badge/Markdown-000?style=flat&logo=markdown)
+![npm](https://img.shields.io/badge/npm-000?style=flat&logo=npm)
+![Autoprefixer](https://img.shields.io/badge/Autoprefixer-000?style=flat&logo=autoprefixer)
+![JavaScript](https://img.shields.io/badge/JavaScript-000?style=flat&logo=javascript)
+![React](https://img.shields.io/badge/React-000?style=flat&logo=react)
+![Vite](https://img.shields.io/badge/Vite-000?style=flat&logo=vite)
+![ESLint](https://img.shields.io/badge/ESLint-000?style=flat&logo=eslint)
+![Axios](https://img.shields.io/badge/Axios-000?style=flat&logo=axios)
+![Chart.js](https://img.shields.io/badge/Chart.js-000?style=flat&logo=chartdotjs)
+
+---
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Testing](#testing)
+
+---
+
+## Overview
+
+---
+
+## Getting Started
+
+### Prerequisites
+
 This project requires the following dependencies:
 
-Programming Language: JavaScript
-Package Manager: npm
+- **Programming Language**: JavaScript
+- **Package Manager**: Npm
 
-Installation
+### Installation
+
 Build Askly-Simple-Survey-Webpage from the source and install dependencies:
 
-Clone the repository:
-git clone https://github.com/Aaryanm03/Askly-Simple-Survey-Webpage
+1. **Clone the repository:**
 
+```bash
+git clone https://github.com/aaryanvm30/Askly-Simple-Survey-Webpage
+```
 
-Navigate to the project directory:
+2. **Navigate to the project directory:**
+
+```bash
 cd Askly-Simple-Survey-Webpage
+```
 
-
-Install the dependencies:
-Using npm:
+3. **npm install**
+```bash
 npm install
+```
 
+4. **Start**
+```bash
+npm run dev
+```
 
-
-Usage
-Run the project with:
-Using npm:
-npm start
-
-Testing
-Askly-simple-survey-webpage uses the test-Framework test framework. Run the test suite with:
-Using npm:
-npm test
-
-Return
