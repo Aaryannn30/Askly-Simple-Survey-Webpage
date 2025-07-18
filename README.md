@@ -2,9 +2,9 @@
 
 *Empower Insights, Simplify Feedback, Drive Innovation*
 
-![Last Commit](https://img.shields.io/github/last-commit/aaryanvm30/Askly-Simple-Survey-Webpage)
-![GitHub Repo stars](https://img.shields.io/github/stars/aaryanvm30/Askly-Simple-Survey-Webpage?style=social)
-![Language](https://img.shields.io/github/languages/top/aaryanvm30/Askly-Simple-Survey-Webpage)
+![Last Commit](https://img.shields.io/github/last-commit/aaryannn30/Askly-Simple-Survey-Webpage)
+![GitHub Repo stars](https://img.shields.io/github/stars/aaryannn30/Askly-Simple-Survey-Webpage?style=social)
+![Language](https://img.shields.io/github/languages/top/aaryannn30/Askly-Simple-Survey-Webpage)
 
 _Built with the tools and technologies:_
 
