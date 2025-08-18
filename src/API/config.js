@@ -1,4 +1,4 @@
-export const endpoint = "https://bcukdw29le.execute-api.ap-south-1.amazonaws.com/dev";
+export const endpoint = "*****************************************************";
 
 export const auth = {
   signUp: `/auth/signUp`, // Sign up user
